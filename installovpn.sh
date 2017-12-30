@@ -23,7 +23,7 @@ if [[ $ether = "" ]]; then
 fi
 
 
-	source="https://raw.githubusercontent.com/elangoverdosis2/cinta"
+	source="https://raw.githubusercontent.com/brantbell/cinta"
 
 
 # go to root
