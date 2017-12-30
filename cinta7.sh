@@ -19,7 +19,7 @@ if [[ $ether = "" ]]; then
         ether=eth0
 fi
 
-	source="https://raw.githubusercontent.com/elangoverdosis2/cinta"
+	source="https://raw.githubusercontent.com/brantbell/cinta"
 
 
 # go to root
@@ -47,7 +47,7 @@ if ! grep -w -q $MYIP IP; then
                
                  Please make payment before use auto script
                  ..........................................
-                 .        Price: Rp.20.000 = 1IP          .
+                 .          Price: Rm.20 = 1IP            .
                  .          *****************             .
                  .           Maybank Account              .
                  .           =================            .
@@ -123,12 +123,6 @@ cd
 cd
 rm -rf /root/.bashrc
 wget -O /root/.bashrc $source/debian7/.bashrc
-
-#text gambar
-apt-get install boxes
-# text pelangi
-sudo apt-get install ruby -y
-sudo gem install lolcat
  
 # install webserver
 cd
