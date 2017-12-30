@@ -66,7 +66,7 @@ do
 	;;
 	"Semua User Dan Tanggal Kadaluarsa")
 	clear
-	user-list | lolcat
+	user-list 
 	break
 	;;
 	"Hapus User")
@@ -137,7 +137,7 @@ biar user senang bs multilogin lagi.."
 	clear
 	echo ""
 	echo "AUTO KILL LOGIN,SUDAH SAYA MATIKAN BOS 
-User Sudah Bisa Multi Login Lagi!!!" | lolcat
+User Sudah Bisa Multi Login Lagi!!!" 
 	break
 	;;
 	"Ganti Password VPS")
