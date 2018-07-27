@@ -74,7 +74,7 @@ apt-get -y --purge remove bind9*;
 #apt-get -y autoremove;
 
 # update
-apt-get update;apt-get -y upgrade;
+apt-get update;apt-get -y upgrade;apt-get install sudo;
 
 # install webserver
 apt-get -y install nginx php5-fpm php5-cli
@@ -166,8 +166,8 @@ service ssh restart
 #apt-get -y update
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 442"/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="\/etc\/issue.net"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
@@ -261,15 +261,15 @@ echo 'Config file is at /usr/local/ddos/ddos.conf'
 echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
 
 # install squid3
-apt-get -y install squid3
+sudo apt-get -y install squid3
 wget -O /etc/squid3/squid.conf $source/Debian7/squid3.conf
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
 # install webmin
 cd
-#wget -O webmin-current.deb http://prdownloads.sourceforge.net/webadmin/webmin_1.760_all.deb
-wget -O webmin-current.deb $source/Debian7/webmin-current.deb
+wget -O webmin-current.deb http://prdownloads.sourceforge.net/webadmin/webmin_1.890_all.deb
+#wget -O webmin-current.deb $source/Debian7/webmin-current.deb
 dpkg -i --force-all webmin-current.deb
 apt-get -y -f install;
 #sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
