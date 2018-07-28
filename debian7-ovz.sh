@@ -100,7 +100,7 @@ service vnstat restart
 
 # install screenfetch
 #cd
-#wget -O /usr/bin/screenfetch "https://kopet88.ml/debian7/repo/screenfetch"
+#wget -O /usr/bin/screenfetch "https://raw.githubusercontent.com/brantbell/cinta/debian7/screenfetch"
 #chmod +x /usr/bin/screenfetch
 #echo "clear" >> .profile
 #echo "screenfetch" >> .profile
@@ -115,7 +115,7 @@ gem install lolcat
 # text warna
 cd
 rm -rf /root/.bashrc
-wget -O /root/.bashrc "https://kopet88.ml/debian7/repo/bashrc"
+wget -O /root/.bashrc "https://raw.githubusercontent.com/brantbell/cinta/debian7/.bashrc"
 
 # install webserver
 cd
@@ -162,7 +162,7 @@ http {
 }
 END3
 mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://kopet88.ml/debian7/repo/index.html"
+wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/brantbell/cinta/debian7/index.html"
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 args='$args'
 uri='$uri'
@@ -226,17 +226,17 @@ mkdir /var/lib/premium-script
 /etc/init.d/pptpd restart
 
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://kopet88.ml/debian7/repo/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/brantbell/cinta/debian7/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://kopet88.ml/debian7/repo/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/brantbell/cinta/debian7/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://kopet88.ml/debian7/repo/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://kopet88.ml/debian7/repo/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/brantbell/cinta/debian7/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/brantbell/cinta/debian7/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -244,7 +244,7 @@ service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://kopet88.ml/debian7/repo/mrtg.conf" >> /etc/mrtg.cfg
+curl "https://raw.githubusercontent.com/brantbell/cinta/debian7/mrtg.conf" >> /etc/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -265,7 +265,7 @@ cd
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 443 -p 2000 -p 22507"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 443"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/bannerssh.net"/g' /etc/default/dropbear
@@ -274,9 +274,9 @@ service dropbear restart
 
 #Upgrade to Dropbear 2017
 apt-get install zlib1g-dev
-wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2
-bzip2 -cd dropbear-2017.75.tar.bz2 | tar xvf -
-cd dropbear-2017.75
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2016.75.tar.bz2
+bzip2 -cd dropbear-2016.75.tar.bz2 | tar xvf -
+cd dropbear-2016.75
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
@@ -286,7 +286,7 @@ service dropbear restart
 
 # install vnstat gui
 cd /home/vps/public_html/
-wget https://kopet88.ml/debian7/repo/vnstat_php_frontend-1.5.1.tar.gz
+wget "https://raw.githubusercontent.com/brantbell/cinta/debian7/vnstat_php_frontend-1.5.1.tar.gz"
 tar xf vnstat_php_frontend-1.5.1.tar.gz
 rm vnstat_php_frontend-1.5.1.tar.gz
 mv vnstat_php_frontend-1.5.1 vnstat
@@ -340,7 +340,7 @@ service squid3 restart
 
 # install webmin
 cd
-wget "https://kopet88.ml/debian7/repo/webmin_1.801_all.deb"
+wget "https://raw.githubusercontent.com/brantbell/cinta/debian7/webmin_1.801_all.deb"
 dpkg --install webmin_1.801_all.deb;
 apt-get -y -f install;
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
