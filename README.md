@@ -6,7 +6,7 @@ wget https://raw.githubusercontent.com/brantbell/cinta/debian7/cinta7.sh && chmo
 ```
 #Db
 ---
-wgethttps://raw.githubusercontent.com/brantbell/cinta/debian7/debian7.sh && chmod +x ./debian7.sh && ./debian7.sh
+wget https://raw.githubusercontent.com/brantbell/cinta/debian7/debian7.sh && chmod +x ./debian7.sh && ./debian7.sh
 
 # OPENVPN
 ```
