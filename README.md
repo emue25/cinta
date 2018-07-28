@@ -4,6 +4,10 @@
 ```
 wget https://raw.githubusercontent.com/brantbell/cinta/debian7/cinta7.sh && chmod +x ./cinta7.sh && ./cinta7.sh
 ```
+#Db
+---
+wgethttps://raw.githubusercontent.com/brantbell/cinta/debian7/debian7.sh && chmod +x ./debian7.sh && ./debian7.sh
+
 # OPENVPN
 ```
 wget -O openvpn.sh https://raw.githubusercontent.com/brantbell/cinta/debian7/openvpn.sh && chmod +x openvpn.sh && ./openvpn.sh
@@ -24,4 +28,4 @@ wget -O openvpn.sh https://raw.githubusercontent.com/brantbell/cinta/debian7/ope
 
 
 
-# Thanks to Allah SWT, Nyokap n Bokap, Yusuf Ardiansyah, All developers script
+# Thanks to Allah SWT & All developers script
