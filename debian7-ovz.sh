@@ -381,10 +381,31 @@ sed -i $MYIP2 /etc/iptables.up.rules;
 iptables-restore < /etc/iptables.up.rules
 
 #download script
-cd /usr/bin
-wget -O menu.tar.gz "https://kopet88.ml/debian7/menu/menu.tar.gz"
-tar -xvf menu.tar.gz
-rm -f menu.tar.gz
+wget -O /usr/bin/benchmark "https://raw.githubusercontent.com/brantbell/cinta/debian7/benchmark.sh"
+wget -O /usr/bin/speedtest "https://raw.githubusercontent.com/brantbell/cinta/debian7/speedtest_cli.py"
+wget -O /usr/bin/ps-mem "https://raw.githubusercontent.com/brantbell/cinta/debian7/ps_mem.py"
+wget -O /usr/bin/dropmon "https://raw.githubusercontent.com/brantbell/cinta/debian7/dropmon.sh"
+wget -O /usr/bin/menu "https://raw.githubusercontent.com/brantbell/cinta/debian7/menu.sh"
+wget -O /usr/bin/user-active-list "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-active-list.sh"
+wget -O /usr/bin/user-add "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-add.sh"
+wget -O /usr/bin/user-add-pptp "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-add-pptp.sh"
+wget -O /usr/bin/user-del "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-del.sh"
+wget -O /usr/bin/disable-user-expire "https://raw.githubusercontent.com/brantbell/cinta/debian7/disable-user-expire.sh"
+wget -O /usr/bin/delete-user-expire "https://raw.githubusercontent.com/brantbell/cinta/debian7/delete-user-expire.sh"
+wget -O /usr/bin/banned-user "https://raw.githubusercontent.com/brantbell/cinta/debian7/banned-user.sh"
+wget -O /usr/bin/unbanned-user "https://raw.githubusercontent.com/brantbell/cinta/debian7/unbanned-user.sh"
+wget -O /usr/bin/user-expire-list "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-expire-list.sh"
+wget -O /usr/bin/user-gen "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-gen.sh"
+wget -O /usr/bin/userlimit.sh "https://raw.githubusercontent.com/brantbell/cinta/debian7/userlimit.sh"
+#wget -O /usr/bin/userlimitssh.sh "https://raw.githubusercontent.com/brantbell/cinta/debian7/userlimitssh.sh"
+wget -O /usr/bin/user-list "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-list.sh"
+wget -O /usr/bin/user-login "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-login.sh"
+wget -O /usr/bin/user-pass "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-pass.sh"
+wget -O /usr/bin/user-renew "https://raw.githubusercontent.com/brantbell/cinta/debian7/user-renew.sh"
+wget -O /usr/bin/clearcache.sh "https://raw.githubusercontent.com/brantbell/cinta/debian7/clearcache.sh"
+wget -O /usr/bin/bannermenu "https://raw.githubusercontent.com/brantbell/cinta/debian7/bannermenu"
+wget -O /usr/bin/menu-update-script-vps.sh "https://raw.githubusercontent.com/brantbell/cinta/debian7/menu-update-script-vps.sh"
+wget -O /usr/bin/vpnmon "https://raw.githubusercontent.com/brantbell/cinta/debian7/vpnmon"
 
 cd
 chmod +x /usr/bin/edit-port
@@ -422,7 +443,7 @@ chmod +x /usr/bin/user-pass
 chmod +x /usr/bin/user-renew
 chmod +x /usr/bin/clearcache.sh
 chmod +x /usr/bin/bannermenu
-chmod +x /usr/bin/menu-update.sh
+chmod +x /usr/bin/menu-update-script-vps.sh
 cd
 
 # cron
@@ -434,7 +455,7 @@ echo "0 */1 * * * root /usr/bin/clearcache.sh" > /etc/cron.d/clearcache1
 clear
 
 # bannerssh
-wget https://kopet88.ml/debian7/bannerssh
+wget https://raw.githubusercontent.com/brantbell/cinta/debian7/bannerssh
 mv ./bannerssh /etc/bannerssh
 chmod 0644 /etc/bannerssh
 service dropbear restart
@@ -447,7 +468,7 @@ mkswap /swapfile
 # jalan swapfile
 swapon /swapfile
 #auto star saat reboot
-wget https://kopet88.ml/debian7/repo/fstab
+wget https://raw.githubusercontent.com/brantbell/cinta/debian7/fstab
 mv ./fstab /etc/fstab
 chmod 644 /etc/fstab
 sysctl vm.swappiness=10
@@ -457,7 +478,7 @@ chmod 0600 /swapfile
 cd
 
 #ovpn
-wget -O ovpn.sh $source/https://kopet88.ml/debian7/repo/ovpn.sh
+wget -O ovpn.sh https://raw.githubusercontent.com/brantbell/cinta/debian7/ovpn.sh
 chmod +x ovpn.sh
 ./ovpn.sh
 rm ./ovpn.sh
