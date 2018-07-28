@@ -274,9 +274,9 @@ service dropbear restart
 
 #Upgrade to Dropbear 2017
 apt-get install zlib1g-dev
-wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2016.75.tar.bz2
-bzip2 -cd dropbear-2016.75.tar.bz2 | tar xvf -
-cd dropbear-2016.75
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2016.74.tar.bz2
+bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
+cd dropbear-2016.74
 ./configure
 make && make install
 mv /usr/sbin/dropbear /usr/sbin/dropbear1
@@ -340,14 +340,13 @@ service squid3 restart
 
 # install webmin
 cd
-wget "https://raw.githubusercontent.com/brantbell/cinta/debian7/webmin_1.801_all.deb"
-dpkg --install webmin_1.801_all.deb;
+wget -O webmin-current.deb http://prdownloads.sourceforge.net/webadmin/webmin_1.890_all.deb
+dpkg -i --force-all webmin-current.deb
 apt-get -y -f install;
-sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
-rm /root/webmin_1.801_all.deb
+rm -f /root/webmin-current.deb
+apt-get -y --force-yes -f install libxml-parser-perl
 service webmin restart
 service vnstat restart
-apt-get -y --force-yes -f install libxml-parser-perl
 
 #Setting IPtables
 cat > /etc/iptables.up.rules <<-END
