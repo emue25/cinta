@@ -94,7 +94,7 @@ apt-get -y --purge remove dropbear*;
 #apt-get -y autoremove;
 
 # update
-apt-get update;apt-get -y upgrade;
+apt-get update;apt-get -y upgrade;apt-get -y install sudo;
 
 # install webserver
 apt-get -y install nginx php5-fpm php5-cli
@@ -104,15 +104,15 @@ cd
 # install essential package
 #echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
 #apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
-apt-get -y install build-essential
+#apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
+#apt-get -y install build-essential
 
 # disable exim
-service exim4 stop
-sysv-rc-conf exim4 off
+#service exim4 stop
+#sysv-rc-conf exim4 off
 
 # update apt-file
-apt-file update
+#apt-file update
 
 # setting vnstat
 #vnstat -u -i $ether
@@ -179,7 +179,7 @@ apt-get -y update
 apt-get install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 443"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 442"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="bannerssh"/g' /etc/default/dropbear
@@ -193,15 +193,15 @@ service dropbear restart
 service ssh restart
 
 # upgade dropbear 2016.74
-apt-get install zlib1g-dev
-wget $source/debian7/dropbear-2016.74.tar.bz2
-bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
-cd dropbear-2016.74
-./configure
-make && make install
-mv /usr/sbin/dropbear /usr/sbin/dropbear.old
-ln /usr/local/sbin/dropbear /usr/sbin/dropbear
-cd && rm -rf dropbear-2016.74 && rm -rf dropbear-2016.74.tar.bz2
+#apt-get install zlib1g-dev
+#wget $source/debian7/dropbear-2016.74.tar.bz2
+#bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
+#cd dropbear-2016.74
+#./configure
+#make && make install
+#mv /usr/sbin/dropbear /usr/sbin/dropbear.old
+#ln /usr/local/sbin/dropbear /usr/sbin/dropbear
+#cd && rm -rf dropbear-2016.74 && rm -rf dropbear-2016.74.tar.bz2
 
 # install vnstat gui
 #cd /home/vps/public_html/
@@ -262,9 +262,9 @@ service webmin restart
 service vnstat restart
 
 # install pptp vpn
-wget -O /root/pptp.sh $source/debian7/pptp.sh
-chmod +x pptp.sh
-./pptp.sh
+#wget -O /root/pptp.sh $source/debian7/pptp.sh
+#chmod +x pptp.sh
+#./pptp.sh
 
 # download script
 cd
@@ -347,17 +347,17 @@ chmod 0600 /swapfile
 cd
 
 #ovpn
-wget -O ovpn.sh $source/debian7/installovpn.sh
-chmod +x ovpn.sh
-./ovpn.sh
-rm ./ovpn.sh
+#wget -O ovpn.sh $source/debian7/installovpn.sh
+#chmod +x ovpn.sh
+#./ovpn.sh
+#rm ./ovpn.sh
 
 echo "deenie" > /etc/openvpn/pass.txt
 
 usermod -s /bin/false mail
-echo "mail:deenie" | chpasswd
-useradd -s /bin/false -M deenie11
-echo "deenie11:deenie" | chpasswd
+echo "mail:kopet" | chpasswd
+useradd -s /bin/false -M zhangzi
+echo "zhangzi:kopet" | chpasswd
 # finishing
 chown -R www-data:www-data /home/vps/public_html
 service cron restart
