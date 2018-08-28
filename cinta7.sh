@@ -100,21 +100,21 @@ apt-get -y install zip tar
 apt-get install python
 cd
 # install essential package
-#echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-#apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-#apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
-#apt-get -y install build-essential
+echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
+apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
+apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
+apt-get -y install build-essential
 
 # disable exim
-#service exim4 stop
-#sysv-rc-conf exim4 off
+service exim4 stop
+sysv-rc-conf exim4 off
 
 # update apt-file
-#apt-file update
+apt-file update
 
 # setting vnstat
-#vnstat -u -i $ether
-#service vnstat restart
+vnstat -u -i $ether
+service vnstat restart
 cd
 
 # text wrn
@@ -147,23 +147,23 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 cd
 
 # install mrtg
-#apt-get update;apt-get -y install snmpd;
-#wget -O /etc/snmp/snmpd.conf $source/debian7/snmpd.conf
-#wget -O /root/mrtg-mem.sh $source/debian7/mrtg-mem.sh
-#chmod +x /root/mrtg-mem.sh
-#cd /etc/snmp/
-#sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
-#service snmpd restart
-#snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
-#mkdir -p /home/vps/public_html/mrtg
-#cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-#curl $source/debian7/mrtg.conf >> /etc/mrtg.cfg
-#sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
-#sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
-#indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
-#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-#if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+apt-get update;apt-get -y install snmpd;
+wget -O /etc/snmp/snmpd.conf $source/debian7/snmpd.conf
+wget -O /root/mrtg-mem.sh $source/debian7/mrtg-mem.sh
+chmod +x /root/mrtg-mem.sh
+cd /etc/snmp/
+sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
+service snmpd restart
+snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
+mkdir -p /home/vps/public_html/mrtg
+cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
+curl $source/debian7/mrtg.conf >> /etc/mrtg.cfg
+sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
+sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
+indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
+if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
+if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
 cd
 
 # setting port ssh
@@ -183,6 +183,17 @@ echo "/usr/sbin/nologin" >> /etc/shells
 sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="bannerssh"/g' /etc/default/dropbear
 /etc/init.d/dropbear restart
 
+# upgade dropbear 2016.74
+apt-get install zlib1g-dev
+wget $source/debian7/dropbear-2016.74.tar.bz2
+bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
+cd dropbear-2016.74
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear.old
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
+cd && rm -rf dropbear-2016.74 && rm -rf dropbear-2016.74.tar.bz2
+
 # bannerssh
 wget $source/debian7/bannerssh
 mv ./bannerssh /bannerssh
@@ -190,29 +201,18 @@ chmod 0644 /bannerssh
 service dropbear restart
 service ssh restart
 
-# upgade dropbear 2016.74
-#apt-get install zlib1g-dev
-#wget $source/debian7/dropbear-2016.74.tar.bz2
-#bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
-#cd dropbear-2016.74
-#./configure
-#make && make install
-#mv /usr/sbin/dropbear /usr/sbin/dropbear.old
-#ln /usr/local/sbin/dropbear /usr/sbin/dropbear
-#cd && rm -rf dropbear-2016.74 && rm -rf dropbear-2016.74.tar.bz2
-
 # install vnstat gui
-#cd /home/vps/public_html/
-#wget $source/debian7/vnstat_php_frontend-1.5.1.tar.gz
-#tar xvfz vnstat_php_frontend-1.5.1.tar.gz
-#rm vnstat_php_frontend-1.5.1.tar.gz
-#mv vnstat_php_frontend-1.5.1 vnstat
-#cd vnstat
-#sed -i "s/eth0/$ether/g" config.php
-#sed -i "s/\$iface_list = array('venet0', 'sixxs');/\$iface_list = array($ether);/g" config.php
-#sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-#sed -i 's/Internal/Internet/g' config.php
-#sed -i '/SixXS IPv6/d' config.php
+cd /home/vps/public_html/
+wget $source/debian7/vnstat_php_frontend-1.5.1.tar.gz
+tar xvfz vnstat_php_frontend-1.5.1.tar.gz
+rm vnstat_php_frontend-1.5.1.tar.gz
+mv vnstat_php_frontend-1.5.1 vnstat
+cd vnstat
+sed -i "s/eth0/$ether/g" config.php
+sed -i "s/\$iface_list = array('venet0', 'sixxs');/\$iface_list = array($ether);/g" config.php
+sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
+sed -i 's/Internal/Internet/g' config.php
+sed -i '/SixXS IPv6/d' config.php
 cd
 
 # block all port except
@@ -260,9 +260,9 @@ service webmin restart
 service vnstat restart
 
 # install pptp vpn
-#wget -O /root/pptp.sh $source/debian7/pptp.sh
-#chmod +x pptp.sh
-#./pptp.sh
+wget -O /root/pptp.sh $source/debian7/pptp.sh
+chmod +x pptp.sh
+./pptp.sh
 
 # download script
 cd
