@@ -89,7 +89,7 @@ apt-get -y --purge remove apache2*;
 apt-get -y --purge remove sendmail*;
 apt-get -y --purge remove bind9*;
 apt-get -y --purge remove dropbear*;
-#apt-get -y autoremove;
+apt-get -y autoremove;
 
 # update
 apt-get update;apt-get -y upgrade;apt-get -y install sudo;
@@ -101,7 +101,7 @@ apt-get install python
 cd
 # install essential package
 #echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
+#apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
 apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs less screen psmisc apt-file whois ptunnel ngrep mtr git zsh unzip unrar rsyslog debsums rkhunter
 apt-get -y install build-essential
 
@@ -260,9 +260,9 @@ service webmin restart
 service vnstat restart
 
 # install pptp vpn
-wget -O /root/pptp.sh $source/debian7/pptp.sh
-chmod +x pptp.sh
-./pptp.sh
+#wget -O /root/pptp.sh $source/debian7/pptp.sh
+#chmod +x pptp.sh
+#./pptp.sh
 
 # download script
 cd
@@ -355,37 +355,37 @@ sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 /etc/init.d/stunnel4 restart
 
 #ovpn
-wget -O ovpn.sh $source/debian7/installovpn.sh
-chmod +x ovpn.sh
-./ovpn.sh
-rm ./ovpn.sh
+#wget -O ovpn.sh $source/debian7/installovpn.sh
+#chmod +x ovpn.sh
+#./ovpn.sh
+#rm ./ovpn.sh
 
-echo "deenie" > /etc/openvpn/pass.txt
+#echo "deenie" > /etc/openvpn/pass.txt
 
-usermod -s /bin/false mail
-echo "mail:kopet" | chpasswd
-useradd -s /bin/false -M zhangzi
-echo "zhangzi:kopet" | chpasswd
+#usermod -s /bin/false mail
+#echo "mail:kopet" | chpasswd
+#useradd -s /bin/false -M zhangzi
+#echo "zhangzi:kopet" | chpasswd
 
 #Setting USW
-apt-get install ufw
-ufw allow ssh
-ufw allow 1194/tcp
-sed -i 's|DEFAULT_INPUT_POLICY="DROP"|DEFAULT_INPUT_POLICY="ACCEPT"|' /etc/default/ufw
-sed -i 's|DEFAULT_FORWARD_POLICY="DROP"|DEFAULT_FORWARD_POLICY="ACCEPT"|' /etc/default/ufw
-cat > /etc/ufw/before.rules <<-END
+#apt-get install ufw
+#ufw allow ssh
+#ufw allow 1194/tcp
+#sed -i 's|DEFAULT_INPUT_POLICY="DROP"|DEFAULT_INPUT_POLICY="ACCEPT"|' /etc/default/ufw
+#sed -i 's|DEFAULT_FORWARD_POLICY="DROP"|DEFAULT_FORWARD_POLICY="ACCEPT"|' /etc/default/ufw
+#cat > /etc/ufw/before.rules <<-END
 # START OPENVPN RULES
 # NAT table rules
-*nat
-:POSTROUTING ACCEPT [0:0]
+#*nat
+#:POSTROUTING ACCEPT [0:0]
 # Allow traffic from OpenVPN client to eth0
--A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
-COMMIT
+#-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
+#COMMIT
 # END OPENVPN RULES
-END
-ufw enable
-ufw status
-ufw disable
+#END
+#ufw enable
+#ufw status
+#ufw disable
 
 # finishing
 chown -R www-data:www-data /home/vps/public_html
