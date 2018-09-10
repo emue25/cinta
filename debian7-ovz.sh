@@ -61,9 +61,9 @@ service ssh restart
 
 # set repo
 cat > /etc/apt/sources.list <<END2
-deb http://cdn.debian.net/debian wheezy main contrib non-free
-deb http://security.debian.org/ wheezy/updates main contrib non-free
-deb http://packages.dotdeb.org wheezy all
+deb http://cdn.debian.net/debian jessie main contrib non-free
+deb http://security.debian.org/ jessie/updates main contrib non-free
+deb http://packages.dotdeb.org jessie all
 END2
 wget "http://www.dotdeb.org/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
@@ -264,24 +264,24 @@ service ssh restart
 cd
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 442"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=777/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 443"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/bannerssh.net"/g' /etc/default/dropbear
 service ssh restart
-service dropbear restart
+/etc/init.d/dropbear restart
 
 #Upgrade to Dropbear 2017
-#apt-get install zlib1g-dev
-#wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2016.74.tar.bz2
-#bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
-#cd dropbear-2016.74
-#./configure
-#make && make install
-#mv /usr/sbin/dropbear /usr/sbin/dropbear1
-#ln /usr/local/sbin/dropbear /usr/sbin/dropbear
-#service dropbear restart
+apt-get install zlib1g-dev
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2016.74.tar.bz2
+bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
+cd dropbear-2016.74
+./configure
+make && make install
+mv /usr/sbin/dropbear /usr/sbin/dropbear1
+ln /usr/local/sbin/dropbear /usr/sbin/dropbear
+/etc/init.d/dropbear restart
 
 
 # install vnstat gui
@@ -326,7 +326,7 @@ http_access deny manager
 http_access allow localhost
 http_access deny all
 http_port 8080
-http_port 8000
+http_port 80
 http_port 3128
 coredump_dir /var/spool/squid3
 refresh_pattern ^ftp: 1440 20% 10080
