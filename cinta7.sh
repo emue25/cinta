@@ -84,20 +84,20 @@ wget http://www.dotdeb.org/dotdeb.gpg
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 
 # remove unused
-apt-get -y --purge remove samba*;
-apt-get -y --purge remove apache2*;
-apt-get -y --purge remove sendmail*;
-apt-get -y --purge remove bind9*;
-apt-get -y --purge remove dropbear*;
-apt-get -y autoremove;
+sudo apt-get -y --purge remove samba*;
+sudo apt-get -y --purge remove apache2*;
+sudo apt-get -y --purge remove sendmail*;
+sudo apt-get -y --purge remove bind9*;
+sudo apt-get -y --purge remove dropbear*;
+sudo apt-get -y autoremove;
 
 # update
-apt-get update;apt-get -y upgrade;apt-get -y install sudo;
+sudo apt-get update;apt-get -y upgrade;apt-get -y install sudo;
 
 # install webserver
-apt-get -y install nginx php5-fpm php5-cli
-apt-get -y install zip tar
-apt-get install python
+sudo apt-get -y install nginx php5-fpm php5-cli
+sudo apt-get -y install zip tar
+sudo apt-get install python
 cd
 # install essential package
 #echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
@@ -173,8 +173,8 @@ sed -i '$ i\Banner bannerssh' /etc/ssh/sshd_config
 service ssh restart
 
 # install dropbear
-apt-get -y update
-apt-get install dropbear
+sudo apt-get -y update
+sudo apt-get install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=777/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 443"/g' /etc/default/dropbear
@@ -184,7 +184,7 @@ sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="bannerssh"/g' /etc/default/dropbea
 /etc/init.d/dropbear restart
 
 # upgade dropbear 2016.74
-apt-get install zlib1g-dev
+sudo apt-get install zlib1g-dev
 wget $source/debian7/dropbear-2016.74.tar.bz2
 bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
 cd dropbear-2016.74
@@ -198,8 +198,8 @@ cd && rm -rf dropbear-2016.74 && rm -rf dropbear-2016.74.tar.bz2
 wget $source/debian7/bannerssh
 mv ./bannerssh /bannerssh
 chmod 0644 /bannerssh
-service dropbear restart
-service ssh restart
+systemctl service dropbear restart
+systemctl service ssh restart
 
 # install vnstat gui
 cd /home/vps/public_html/
@@ -239,13 +239,13 @@ sed -i '$ i\iptables -A OUTPUT -p udp -m udp -j DROP' /etc/rc.local
 sed -i '$ i\iptables -A OUTPUT -p tcp -m tcp -j DROP' /etc/rc.local
 
 # install fail2ban
-apt-get update;apt-get -y install fail2ban;service fail2ban restart
+sudo apt-get update;apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
-apt-get -y install squid3
+sudo apt-get -y install squid3
 wget -O /etc/squid3/squid.conf $source/debian7/squid3.conf
 sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 restart
+systemctl service squid3 restart
 
 # install webmin
 cd
@@ -256,8 +256,8 @@ apt-get -y -f install;
 #sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 rm -f /root/webmin-current.deb
 apt-get -y --force-yes -f install libxml-parser-perl
-service webmin restart
-service vnstat restart
+systemctl service webmin restart
+systemctl service vnstat restart
 
 # install pptp vpn
 #wget -O /root/pptp.sh $source/debian7/pptp.sh
@@ -344,9 +344,9 @@ chown root:root /swapfile
 chmod 0600 /swapfile
 cd
 #install stunnel ssl
-apt-get update
-apt-get upgrade
-apt-get install stunnel4
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install stunnel4
 wget -O /etc/stunnel/stunnel.conf https://raw.githubusercontent.com/brantbell/cream/mei/stunnel.conf
 openssl genrsa -out key.pem 2048
 openssl req -new -x509 -key key.pem -out cert.pem -days 1095
