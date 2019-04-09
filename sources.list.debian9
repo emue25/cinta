@@ -1,2 +1,4 @@
-deb http://download.webmin.com/download/repository sarge contrib
-deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib
+deb http://deb.debian.org/debian stretch main contrib non-free
+deb-src http://deb.debian.org/debian stretch main contrib non-free
+deb http://packages.dotdeb.org stretch all
+deb-src http://packages.dotdeb.org stretch all
